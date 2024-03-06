@@ -6,7 +6,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
+      colors: { 
+        darkGreen: '#4D917A',
+        yellowButton: '#F0F1A1',
+        lightGreen: '#94BDAF',
+        notWhite: '#CADED7',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         btn: {
