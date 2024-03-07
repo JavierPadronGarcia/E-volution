@@ -1,10 +1,9 @@
+import { type UUID } from "crypto"
+
 export type Like = {
-  user_id: string,
-  post_id: string,
-  created_at: string,
-  users?: {
-    filename?: string,
-    name?: string,
-    e_percentage?: number
-  }
+  user_id: UUID,
+  post_id: UUID,
+  title: string,
+  description: string,
+  filename?: string
 }

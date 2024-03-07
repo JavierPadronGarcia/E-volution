@@ -1,10 +1,13 @@
 import { createClient } from '@/utils/supabase/client';
 import { Like } from '@/app/types/types';
+import { type UUID } from 'crypto';
 
-export const getAll = async (): Promise<Like[]> => {
+export const getAllLikesOfTheUser = async (user_id_param: UUID): Promise<Like[]> => {
   try {
     const supabase = createClient();
-    let { data, error } = await supabase.from('user_post').select('*');
+
+    const { data, error } = await supabase.rpc('get_likes_info', { user_id_param });
+
     if (error) {
       throw error;
     }
@@ -14,24 +17,40 @@ export const getAll = async (): Promise<Like[]> => {
   }
 }
 
-export const getAllLikesOfTheUser = async (id: string): Promise<Like[]> => {
+export const likePost = async (user_id: UUID, post_id: UUID): Promise<boolean> => {
   try {
     const supabase = createClient();
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('user_post')
-      .select(`
-        user_id,
-        post_id,
-        created_at,
-        users(e_percentage)
-      `)
-      .eq('users.id', id);
+      .insert([
+        { user_id: user_id, post_id: post_id },
+      ])
+      .select();
 
     if (error) {
       throw error;
     }
-    return data as Like[];
+    return true;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export const unLikePost = async (user_id: UUID, post_id: UUID): Promise<boolean> => {
+  try {
+    const supabase = createClient();
+
+    const { error } = await supabase
+      .from('user_post')
+      .delete()
+      .eq('user_id', user_id)
+      .eq('post_id', post_id);
+
+    if (error) {
+      throw error;
+    }
+    return true;
   } catch (err) {
     throw err;
   }
