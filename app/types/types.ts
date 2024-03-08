@@ -7,3 +7,15 @@ export type Like = {
   description: string,
   filename?: string
 }
+
+export type Post = {
+  id?: UUID,
+  title: string,
+  description: string,
+  filename: string,
+  user_id: UUID,
+  users?: {
+    name?: string,
+    filename?: string
+  }
+}
