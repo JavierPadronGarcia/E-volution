@@ -11,6 +11,7 @@ module.exports = {
         yellowButton: '#F0F1A1',
         lightGreen: '#94BDAF',
         notWhite: '#CADED7',
+        lightWhite: '#fafafa',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         btn: {
