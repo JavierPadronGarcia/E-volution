@@ -11,7 +11,7 @@ const LikeButton: React.FC<Props> = ({title, handleClick, isActive}) => {
     
     return (
         <div>
-            <button className={ `rounded-md h-12 ${isActive? "bg-darkGreen text-white": "bg-notWhite"} w-[165px] `} onClick={handleClick}>{title}</button>
+            <button className={ ` h-12 ${isActive? "bg-darkGreen text-white": "bg-notWhite"} w-[165px] `} onClick={handleClick}>{title}</button>
         </div>
     );
 };
