@@ -1,5 +1,6 @@
 import BackArrow from "@/components/backArrow";
 
+
 const CalculatePage = () => {
     return (
         <div>
@@ -9,7 +10,7 @@ const CalculatePage = () => {
                 <div className="bg-notWhite w-[148px] h-[148px] rounded-xl"></div>
             </div>
             <div> 
-                <p className="h1page ">Calculate your renewable energy</p>
+                <p className="">Calculate your renewable energy</p>
             </div>
         </div>
     )
