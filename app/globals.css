@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 
-.h1page{
+/*.h1page{
   font-weight: 700;
   font-family: Poppins;
 
-}
+}*/
 
 @layer base {
   :root {

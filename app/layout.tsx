@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poly.variable} ${poppins.className} font-poppins`}>
+    <html lang="en" className={`${poly.variable} ${poppins.variable} font-poppins`}>
       <body className={`bg-background text-foreground`}>
         <main className="min-h-screen flex flex-col items-center">
           {children}

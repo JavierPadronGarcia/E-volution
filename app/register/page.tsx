@@ -3,6 +3,7 @@ import { SubmitButton } from "../login/submit-button";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
+import Link from "next/link";
 
 export default function Register({
   searchParams,
@@ -52,9 +53,9 @@ export default function Register({
   };
 
   return (
-    <div className="ml-0 px-0 w-5/6"> <BackArrow></BackArrow>
+    <div className="w-5/6 flex justify-center"> <BackArrow></BackArrow>
       <div className="flex flex-col w-full sm:max-w-md gap-2">
-        <h1 className="text-center flex justify-center items-center mt-12 mb-8 ">
+        <h1 className="text-center flex justify-center items-center mt-12 mb-8 select-none">
           <span className="font-poly italic text-6xl"> E </span>
           <span className="flex align-middle text-4xl"> -volution</span>
         </h1>
@@ -97,7 +98,7 @@ export default function Register({
             </SubmitButton>
           </div>
           <div>
-            <p className="underline justify-center flex"> Login</p>
+            <Link href='/login' className="underline justify-center flex">Login</Link>
           </div>
         </form>
       </div>
