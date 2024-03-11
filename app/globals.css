@@ -24,4 +24,8 @@
   * {
     @apply border-foreground/20;
   }
+
+  .placeholder-inputs::placeholder {
+    color: #58585A;
+  }
 }
