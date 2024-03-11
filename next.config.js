@@ -2,7 +2,7 @@
 const withFonts = require('next-fonts');
 
 const nextConfig = {
-  ...withFonts(),
+    ...withFonts(),
 };
 
 module.exports = nextConfig;
