@@ -58,9 +58,6 @@ export default function SignUp({
           <span className="font-poly italic text-6xl"> E </span>
           <span className="flex align-middle text-4xl"> -volution</span>
         </h1>
-
-
-
         <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
           <label className="text-md" htmlFor="name">
             Name
@@ -90,7 +87,7 @@ export default function SignUp({
             placeholder="••••••••"
             required
           />
-          
+
           <div className="justify-center flex pt-[60px]">
             <SubmitButton
               formAction={signIn}
