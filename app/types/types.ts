@@ -5,7 +5,7 @@ export type Like = {
   post_id: UUID,
   title: string,
   description: string,
-  filename?: string
+  filename?: string,
 }
 
 export type Post = {
@@ -18,4 +18,13 @@ export type Post = {
     name?: string,
     filename?: string
   }
+}
+
+export type User = {
+  id: UUID,
+  filename?: string,
+  created_at: string,
+  name?: string,
+  description?: string,
+  e_percentage?: number
 }
