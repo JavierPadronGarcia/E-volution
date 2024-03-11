@@ -5,5 +5,4 @@ const nextConfig = {
     ...withFonts(),
 };
 
-
 module.exports = nextConfig;
