@@ -53,9 +53,11 @@ export default function Login({
   };
 
   return (
+
     <div className="ml-0 px-0 w-5/6"> <BackArrow></BackArrow>
       <div className="flex flex-col w-full sm:max-w-md gap-2">
         <h1 className="text-center flex justify-center items-center mt-12 mb-20 select-none">
+
           <span className="font-poly italic text-6xl"> E </span>
           <span className="flex align-middle text-4xl"> -volution</span>
         </h1>
@@ -81,6 +83,7 @@ export default function Login({
             required
           />
 
+
           <div className="justify-center flex pt-[150px]">
             <SubmitButton
               formAction={signIn}
@@ -89,8 +92,10 @@ export default function Login({
             </SubmitButton>
           </div>
           <div>
+
             <Link href='/register' className="underline justify-center flex">Register</Link>
           </div>
+
         </form>
       </div>
     </div>
