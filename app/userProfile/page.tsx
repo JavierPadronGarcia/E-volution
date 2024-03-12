@@ -4,6 +4,7 @@ import Hamburgermenu from '@/components/hamburgermenu';
 import { FiUser } from "react-icons/fi";
 import LikeButton from '@/components/likeButton';
 import News from "@/components/News"
+import Article from '@/components/article';
 
 
 const UserProfile = () => {
@@ -21,7 +22,8 @@ const UserProfile = () => {
                 <div className="m-4 font-poppins">We are a family of five with one dog. We are learning to renew the energy and trying to use the renewable energy as much as we can.</div>
                  </div>
         <News/>
-                 </div>
+        
+        </div>
     );
 };
 
