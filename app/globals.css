@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/*.h1page{
+  font-weight: 700;
+  font-family: Poppins;
+
+}*/
+
 @layer base {
   :root {
     --background: 200 20% 98%;
@@ -24,19 +31,8 @@
   * {
     @apply border-foreground/20;
   }
-}
 
-.animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
-}
-
-@keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .placeholder-inputs::placeholder {
+    color: #58585A;
   }
 }
