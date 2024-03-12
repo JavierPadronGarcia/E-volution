@@ -30,11 +30,13 @@ const News = () => {
           title="title"
           image="@/app/twitter-image.png"
           content="text"
+          isLeft= {true}
         ></Article>
         <Article
           title="title"
           image="@/app/twitter-image.png"
           content="text"
+          isLeft= {false}
         ></Article>
       </div>
     </>
