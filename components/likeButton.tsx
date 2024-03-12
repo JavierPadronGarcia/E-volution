@@ -1,44 +1,18 @@
-'use client';
-
-import { useEffect, useState } from "react";
-import StarSVGComponent from "@/components/likeButton/starSVGComponent";
-import { type UUID } from "crypto";
-import { likePost, unLikePost } from "@/services/likes.service";
+"use client"
 
 type Props = {
-  initialState: boolean,
-  user_id?: UUID,
-  post_id?: UUID
-}
+  title: string
+  handleClick: () => void;
+  isActive: boolean;
+};
 
-export const revalidate = 0;
-
-export default function LikeButton({ initialState, user_id, post_id, className, ...props }: Props & { className?: string }) {
-
-  const [isLiked, setIsLiked] = useState<boolean>(initialState);
-
-  useEffect(() => {
-    setIsLiked(initialState)
-  }, [initialState]);
-
-  const toggleLike = () => {
-    if (user_id && post_id && isLiked === true) {
-      unLikePost(user_id, post_id);
-    }
-
-    if (user_id && post_id && isLiked === false) {
-      likePost(user_id, post_id);
-    }
-
-    setIsLiked(!isLiked);
-  }
+const LikeButton: React.FC<Props> = ({ title, handleClick, isActive }) => {
 
   return (
-    <>
-      {isLiked
-        ? <StarSVGComponent liked={true} onClick={toggleLike} className={`cursor-pointer ${className}`} {...props} />
-        : <StarSVGComponent liked={false} onClick={toggleLike} className={`cursor-pointer ${className}`} {...props} />
-      }
-    </>
-  )
-}
+    <div>
+      <button className={` h-12 ${isActive ? "bg-darkGreen text-white" : "bg-notWhite"} w-[165px] `} onClick={handleClick}>{title}</button>
+    </div>
+  );
+};
+
+export default LikeButton;
