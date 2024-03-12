@@ -4,30 +4,14 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { addUser } from "@/services/users.service";
+import { type UUID } from "crypto";
 
 export default function Register({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const signIn = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    return redirect("/news");
-  };
 
   const signUp = async (formData: FormData) => {
     "use server";
@@ -35,9 +19,10 @@ export default function Register({
     const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+    const name = formData.get('name') as string;
     const supabase = createClient();
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -46,21 +31,28 @@ export default function Register({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/register?message=Could not authenticate user");
     }
 
-    return redirect("/login?message=Check email to continue sign in process");
+    try {
+      if (data.user && data.user.id) await addUser(data.user.id as UUID, name);
+    } catch (err) {
+      return redirect("/register?message=Could not authenticate user");
+    }
+
+    return redirect("/register?message=Check your email to continue sign up process");
   };
 
   return (
-    <div className="w-5/6 flex justify-center"> <BackArrow></BackArrow>
+    <div className="w-5/6 flex justify-center">
+      <BackArrow />
       <div className="flex flex-col w-full sm:max-w-md gap-2">
         <h1 className="text-center flex justify-center items-center mt-12 mb-8 select-none">
           <span className="font-poly italic text-6xl"> E </span>
           <span className="flex align-middle text-4xl"> -volution</span>
         </h1>
 
-        <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+        <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground relative select-none">
           <label className="text-md" htmlFor="name">
             Name
           </label>
@@ -92,12 +84,18 @@ export default function Register({
 
           <div className="justify-center flex pt-[60px]">
             <SubmitButton
-              formAction={signIn}
-              pendingText="Signing In...">
-              Sign In
+              formAction={signUp}
+              pendingText="Signing Up..."
+              className="select-none">
+              Sign Up
             </SubmitButton>
           </div>
-          <div>
+          {searchParams.message &&
+            <div className="h-10 text-center font-bold bg-slate-200 rounded-xl flex items-center justify-center w-[85%] self-center px-5">
+              {searchParams.message}
+            </div>
+          }
+          <div className="w-fit self-center select-none">
             <Link href='/login' className="underline justify-center flex">Login</Link>
           </div>
         </form>
