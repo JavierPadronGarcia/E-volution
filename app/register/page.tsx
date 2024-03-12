@@ -7,7 +7,7 @@ export default function register() {
             <h1 className="font-bold text-3xl"> E - volution </h1>
             </div>
         <div>
-            <input> </input>
+            <input></input>
         </div>
         </div>
     )
