@@ -33,8 +33,8 @@ const SelectedNews = async () => {
             <Link href='/login' className="underline justify-center flex">Login</Link>
             <Link href='/register' className="underline justify-center flex">Register</Link>
           </div>}
-         <div> 
-            {!user && 
+         <div className="w-full"> 
+            {user && 
             <ProfileButton/>}
         </div>
         </>
