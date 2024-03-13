@@ -1,15 +1,7 @@
 import { User } from '@/app/types/types';
 import { createClient as clientCreateClient } from '@/utils/supabase/client';
-import { createClient as serverCreateClient } from '@/utils/supabase/server';
 
 import { type UUID } from 'crypto';
-
-export const getLoggedInUser = async () => {
-  const supabase = serverCreateClient();
-
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
-}
 
 export const getUser = async (userId: UUID) => {
   const supabase = clientCreateClient();
