@@ -6,6 +6,7 @@ import News from "@/components/News";
 import { getLoggedInUser, getUser } from '@/services/users.service';
 import { type UUID } from 'crypto';
 import Link from 'next/link';
+import Article from '@/components/article';
 import { ImageBucketURL } from '@/app/constants/supabaseConstants';
 
 export const revalidate = 0;
@@ -52,6 +53,13 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
         </div>
       </div>
       <News />
+        <div className='absolute'>
+          <Article
+          image='/breakingNews.png'
+          title='Gran Canaria'
+          content='Gran Canaria is becoming to hot for the danish students. They have now melted'
+          />
+        </div>
     </div>
   );
 };
