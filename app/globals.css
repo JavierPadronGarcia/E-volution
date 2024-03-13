@@ -29,4 +29,14 @@
   .placeholder-inputs::placeholder {
     color: #58585A;
   }
+
+  .article-container:hover .article-image {
+    transform: scale(1.06);
+    transition: transform ease-in-out .1s;
+  }
+
+  .article-container:hover .article-arrow {
+    color: #22c55e;
+    transition: color ease-in-out .1s;
+  }
 }

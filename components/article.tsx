@@ -1,25 +1,44 @@
+import { ImageBucketURL } from '@/app/constants/supabaseConstants';
+import { type UUID } from 'crypto';
+import Link from 'next/link';
 import React from 'react';
-import DownRightArrow from '@/components/downRightArrow';
+import { FaArrowRight, FaImage } from "react-icons/fa";
 
-interface ArticleProps {
+type ArticleProps = {
   title: string;
-  image: string;
+  image?: string | null;
   content: string;
+  post_id?: UUID;
+  side: string;
 }
 
-const Article: React.FC<ArticleProps> = ({ title, image, content}) => {
+const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id }) => {
   return (
-    <div className="grid grid-cols-3 bg-darkGreen w-[325px] h-[120px] rounded-md">
-      <img className="w-[108px] h-[108px] p-5" src={image} alt={title} />
-      <div className='col-span-2 p-2'>
-        <h2 className='text-xl text-start underline'>{title}</h2>
-        <p className='text-xs text-left text-lightWhite'>{content}</p>
+    <Link
+      className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-darkGreen w-[368px] h-[120px] rounded-md gap-5 px-5 py-4 article-container`}
+      href={`/selectedNews/${post_id}`}
+    >
+      <div className='w-[30%] h-[84px]'>
+        {image
+          ? <img className="size-full rounded-md article-image" src={`${ImageBucketURL}/${image}`} alt={title} />
+          : <FaImage className='size-full rounded-md article-image' />
+        }
       </div>
-      <div className='absolute right-0 bottom-0'>
-          <DownRightArrow></DownRightArrow>
-        </div>
-    </div>
-    
+      <div className='w-[70%] flex flex-col h-full p-1'>
+        <p className='text-xl text-start font-bold line-clamp-1'>{title}</p>
+        <p className='text-xs text-left text-ellipsis line-clamp-3'>{content}</p>
+      </div>
+      <div className={`absolute w-[22px] h-[22px] article-arrow cursor-pointer bottom-0
+        ${side === 'left'
+          ? 'rotate-45 right-0'
+          : 'rotate-[135deg] left-0'
+        } 
+        `}>
+        <FaArrowRight
+          className='size-full'
+        />
+      </div>
+    </Link>
   );
 };
 
