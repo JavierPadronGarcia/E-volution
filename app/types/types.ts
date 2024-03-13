@@ -21,9 +21,9 @@ export type Post = {
 }
 
 export type User = {
-  id: UUID,
+  id?: UUID,
   filename?: string,
-  created_at: string,
+  created_at?: string,
   name?: string,
   description?: string,
   e_percentage?: number
