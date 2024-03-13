@@ -1,11 +1,12 @@
+import { ImageBucketURL } from '@/app/constants/supabaseConstants';
 import { type UUID } from 'crypto';
 import Link from 'next/link';
 import React from 'react';
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaImage } from "react-icons/fa";
 
 type ArticleProps = {
   title: string;
-  image: string;
+  image?: string | null;
   content: string;
   post_id?: UUID;
   side: string;
@@ -13,17 +14,21 @@ type ArticleProps = {
 
 const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id }) => {
   return (
-    <div
-      className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-darkGreen w-[368px] h-[120px] rounded-md gap-5 px-5 py-4`}
+    <Link
+      className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-darkGreen w-[368px] h-[120px] rounded-md gap-5 px-5 py-4 article-container`}
+      href={`/selectedNews/${post_id}`}
     >
       <div className='w-[30%] h-[84px]'>
-        <img className="size-full rounded-md" src={image} alt={title} />
+        {image
+          ? <img className="size-full rounded-md article-image" src={`${ImageBucketURL}/${image}`} alt={title} />
+          : <FaImage className='size-full rounded-md article-image' />
+        }
       </div>
       <div className='w-[70%] flex flex-col h-full p-1'>
         <p className='text-xl text-start font-bold line-clamp-1'>{title}</p>
         <p className='text-xs text-left text-ellipsis line-clamp-3'>{content}</p>
       </div>
-      <Link href={`/selectedNews/${post_id}`} className={`absolute w-[22px] h-[22px] hover:text-green-500 cursor-pointer bottom-0
+      <div className={`absolute w-[22px] h-[22px] article-arrow cursor-pointer bottom-0
         ${side === 'left'
           ? 'rotate-45 right-0'
           : 'rotate-[135deg] left-0'
@@ -32,8 +37,8 @@ const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id 
         <FaArrowRight
           className='size-full'
         />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
