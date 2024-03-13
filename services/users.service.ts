@@ -51,8 +51,18 @@ export async function updateUser(id: UUID, updatedUser: User) {
   }
 }
 
-export async function logout() {
-  const supabase = clientCreateClient();
-  await supabase.auth.signOut();
-  return true;
+
+export async function updatePercentage(id: UUID, percentage: number) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase.from('users').update({ e_percentage: percentage }).eq('id', id);
+    if (error){
+      throw error;
+    }
+    console.log('Percentage updated:',data);
+    return data;
+  } catch (error: any) {
+    console.error('Error  updating user percentage: ', error.message);
+    throw error;
+  }
 }
