@@ -20,7 +20,7 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
   return (
     <div>
       <BackArrow />
-      <Hamburgermenu />
+      <Hamburgermenu userId={params.userId} />
       <h1 className='mt-16 mb-5 text-center'>{user.name}</h1>
       <div className='justify-center flex text-center gap-8'>
         <div className='w-[148px] h-[148px] bg-notWhite rounded-md border-2 border-darkGreen  justify-center flex items-center'>
