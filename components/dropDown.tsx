@@ -4,8 +4,15 @@ import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineLogout } from "react-icons/ai";
 import { type UUID } from "crypto";
 import Link from "next/link";
+import { createClient } from '@/utils/supabase/client';
 
 const DropDown = ({ userId }: { userId: UUID }) => {
+
+  const handleCreateClient = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+
+  }
 
   return (
     <div className="absolute right-5 top-[80px] z-10">
@@ -14,7 +21,7 @@ const DropDown = ({ userId }: { userId: UUID }) => {
           <FiEdit3 className="w-[22px] h-[22px] text-darkGreen" />
           <p className="text-darkGreen">Edit profile</p>
         </Link>
-        <div className=" w-[122] h-[70px] flex flex-row gap-2">
+        <div className="w-[122] h-[70px] flex flex-row gap-2" onClick={handleCreateClient}>
           <AiOutlineLogout className="w-[22px] h-[22px] text-darkGreen " />
           <p className="text-darkGreen">Log out</p>
         </div>
