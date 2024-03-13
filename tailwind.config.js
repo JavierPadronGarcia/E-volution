@@ -13,6 +13,7 @@ module.exports = {
         notWhite: '#CADED7',
         lightWhite: '#fafafa',
         darkGray: '#58585A',
+        likeYellow: '#FFDC26',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         btn: {
