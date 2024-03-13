@@ -2,15 +2,14 @@ import { createClient } from '@/utils/supabase/client';
 
 
 
-export const AddImage = async (file: File) => {
+export const AddImage = async (file: File, imageType: string) => {
     const supabase = createClient();
     const { data, error } = await supabase.storage
         .from("ImageBucket")
-        .upload("public" + file?.name, file as File);
+        .upload(`${imageType === 'post' ? 'posts/' : 'users/'}${file.name}`, file as File);
 
     if (data) {
-        console.log(data);
-        return console.log("Upload Successful");
+        return data;
     } else if (error) {
         console.log(error);
     }
@@ -42,12 +41,12 @@ export const UpdateImage = async (name: string, file: File) => {
             upsert: true
         })
 
-        if (data) {
-            console.log(data);
-            return console.log("Update Successful");
-        } else if (error) {
-            console.log(error);
-        }
+    if (data) {
+        console.log(data);
+        return console.log("Update Successful");
+    } else if (error) {
+        console.log(error);
+    }
 }
 
 export const DeleteImage = async (name: string) => {
@@ -57,10 +56,10 @@ export const DeleteImage = async (name: string) => {
         .from('ImageBucket')
         .remove([name])
 
-        if (data) {
-            console.log(data);
-            return console.log("Delete Successful");
-        } else if (error) {
-            console.log(error);
-        }
+    if (data) {
+        console.log(data);
+        return console.log("Delete Successful");
+    } else if (error) {
+        console.log(error);
+    }
 }
