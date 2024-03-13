@@ -2,9 +2,11 @@ import BackArrow from "@/components/backArrow";
 import Link from "next/link";
 import StarButton from "@/components/starButton/starButton";
 import { getLoggedInUser } from "@/services/users.service";
+import ProfileButton from "@/components/profileButton";
 
 const SelectedNews = async () => {
     const user=await getLoggedInUser()
+    console.log(user)
 
     return (
         <>
@@ -31,6 +33,10 @@ const SelectedNews = async () => {
             <Link href='/login' className="underline justify-center flex">Login</Link>
             <Link href='/register' className="underline justify-center flex">Register</Link>
           </div>}
+         <div> 
+            {!user && 
+            <ProfileButton/>}
+        </div>
         </>
 
     )
