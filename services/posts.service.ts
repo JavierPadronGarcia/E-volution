@@ -33,6 +33,20 @@ export async function getPostById(id: number) {
   }
 }
 
+export async function getAllPostsOfTheUser(userId: UUID) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase.from('posts').select('*').eq('user_id', userId);
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (error: any) {
+    console.error('Error fetching post by id:', error.message);
+    throw error;
+  }
+}
+
 export async function addPost(newPost: Post) {
   try {
     const supabase = createClient();
