@@ -1,5 +1,5 @@
 import { User } from '@/app/types/types';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/client';
 import { type UUID } from 'crypto';
 
 export const getLoggedInUser = async () => {
@@ -42,7 +42,7 @@ export const addUser = async (userId: UUID, user_name: string) => {
   }
 }
 
-export async function updateUser(id: number, updatedUser: User) {
+export async function updateUser(id: UUID, updatedUser: User) {
   try {
     const supabase = createClient();
     const { data, error } = await supabase.from('users').update(updatedUser).eq('id', id);
