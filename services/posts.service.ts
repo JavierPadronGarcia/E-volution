@@ -36,11 +36,10 @@ export async function getPostById(id: number) {
 export async function addPost(newPost: Post) {
   try {
     const supabase = createClient();
-    const { data, error } = await supabase.from('posts').insert(newPost);
+    const { data, error } = await supabase.from('posts').insert(newPost).select();
     if (error) {
       throw error;
     }
-    console.log("Post added successfully:", data);
     return data;
   } catch (error: any) {
     console.error('Error adding post:', error.message);
