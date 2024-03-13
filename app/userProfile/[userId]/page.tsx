@@ -3,7 +3,8 @@ import BackArrow from "@/components/backArrow";
 import Hamburgermenu from '@/components/hamburgermenu';
 import { FiUser } from "react-icons/fi";
 import News from "@/components/News";
-import { getLoggedInUser, getUser } from '@/services/users.service';
+import { getUser } from '@/services/users.service';
+import { getLoggedInUser } from '@/services/auth.service';
 import { type UUID } from 'crypto';
 import Link from 'next/link';
 import Article from '@/components/article';
@@ -22,7 +23,7 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
   return (
     <div>
       <BackArrow />
-      <Hamburgermenu />
+      <Hamburgermenu userId={params.userId} />
       <h1 className='mt-16 mb-5 text-center'>{user.name}</h1>
       <div className='justify-center flex text-center gap-8'>
         <div className='w-[148px] h-[148px] bg-notWhite rounded-md border-2 border-darkGreen  justify-center flex items-center'>

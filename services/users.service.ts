@@ -1,16 +1,10 @@
 import { User } from '@/app/types/types';
-import { createClient } from '@/utils/supabase/client';
+import { createClient as clientCreateClient } from '@/utils/supabase/client';
+
 import { type UUID } from 'crypto';
 
-export const getLoggedInUser = async () => {
-  const supabase = createClient();
-
-  const { data: { user } } = await supabase.auth.getUser();
-  return user;
-}
-
 export const getUser = async (userId: UUID) => {
-  const supabase = createClient();
+  const supabase = clientCreateClient();
   try {
     const { data, error } = await supabase
       .from('users')
@@ -27,7 +21,7 @@ export const getUser = async (userId: UUID) => {
 }
 
 export const addUser = async (userId: UUID, user_name: string) => {
-  const supabase = createClient();
+  const supabase = clientCreateClient();
   try {
     const { data, error } = await supabase.from('users')
       .insert([
@@ -44,7 +38,7 @@ export const addUser = async (userId: UUID, user_name: string) => {
 
 export async function updateUser(id: UUID, updatedUser: User) {
   try {
-    const supabase = createClient();
+    const supabase = clientCreateClient();
     const { data, error } = await supabase.from('users').update(updatedUser).eq('id', id);
     if (error) {
       throw error;
@@ -56,6 +50,7 @@ export async function updateUser(id: UUID, updatedUser: User) {
     throw error;
   }
 }
+
 
 export async function updatePercentage(id: UUID, percentage: number) {
   try {

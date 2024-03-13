@@ -1,7 +1,7 @@
 import BackArrow from "@/components/backArrow";
 import Link from "next/link";
 import StarButton from "@/components/starButton/starButton";
-import { getLoggedInUser } from "@/services/users.service";
+import { getLoggedInUser } from "@/services/auth.service";
 
 const SelectedNews = async () => {
     const user=await getLoggedInUser()
