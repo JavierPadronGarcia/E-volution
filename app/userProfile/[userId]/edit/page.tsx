@@ -5,7 +5,7 @@ import Hamburgermenu from "@/components/hamburgermenu";
 import { AddImage } from "@/services/images.service";
 import { User } from "@/app/types/types";
 import { updateUser, getUser } from "@/services/users.service";
-import { type UUID } from "crypto";
+import { type UUID, createHash } from "crypto";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState, useEffect } from "react";
 import { FaImage } from "react-icons/fa";
@@ -23,11 +23,19 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const data: { [key: string]: FormDataEntryValue } = Object.fromEntries(formData.entries());
+        const image = data.image as File;
 
-        const newImageData = await AddImage(data.image as File, 'user');
+        const uuid = createHash('sha1').update(Date.now().toString()).digest('hex');
+        const fileExtension = getFileExtension(image.name);
+        const newFileName = `${uuid}.${fileExtension}`;
+        var blob = image.slice(0, image.size, image.type);
+
+        const newFile = new File([blob], newFileName, { type: image.type });
+
+        const newImageData = await AddImage(newFile, 'user');
         if (newImageData) {
             const newUser: User = {
-                name: data.title as string,
+                name: data.name as string,
                 description: data.description as string,
                 filename: newImageData.path,
             }
@@ -46,7 +54,7 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
                 setUser(userData);
                 // Si el usuario tiene una imagen, establecer la URL de la imagen
                 if (userData.filename) {
-                    setImageUrl(ImageBucketURL+`/${userData.filename}`);
+                    setImageUrl(ImageBucketURL + `/${userData.filename}`);
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -60,9 +68,9 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
         const userData = await getUser(params.userId);
         setUser(userData);
         if (userData.filename) {
-          setImageUrl(ImageBucketURL+`/${userData.filename}`);
+            setImageUrl(ImageBucketURL + `/${userData.filename}`);
         }
-      }
+    }
 
     const handleFileInputChange = () => {
         const selectedFile = fileInputRef.current?.files?.[0];
@@ -108,7 +116,7 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
                         name="description"
                         className="resize-none h-[284px] rounded-xl bg-lightGreen p-2 text-black placeholder-inputs w-full"
                         defaultValue={user?.description || ""}
-                        
+
                     />
                     <SubmitButton pendingText="updating...">
                         Submit article
@@ -118,3 +126,7 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
         </div>
     )
 }
+
+function getFileExtension(filename: string) {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+  }
