@@ -21,32 +21,38 @@ export default function CreatePostPage({
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [showError, setShowerror] = useState<boolean>(false);
 
   const postArticle = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const data: { [key: string]: FormDataEntryValue } = Object.fromEntries(formData.entries());
-    const image = data.image as File;
 
-    const uuid = createHash('sha1').update(Date.now().toString()).digest('hex');
-    const fileExtension = getFileExtension(image.name);
-    const newFileName = `${uuid}.${fileExtension}`;
-    var blob = image.slice(0, image.size, image.type);
+    if (!data.image || !data.title || !data.description || !searchParams.user_id) {
+      setShowerror(true);
+    } else {
+      setShowerror(false);
+      const image = data.image as File;
 
-    const newFile = new File([blob], newFileName, { type: image.type });
+      const uuid = createHash('sha1').update(Date.now().toString()).digest('hex');
+      const fileExtension = getFileExtension(image.name);
+      const newFileName = `${uuid}.${fileExtension}`;
+      var blob = image.slice(0, image.size, image.type);
 
-    const newImageData = await AddImage(newFile, 'post');
-    if (newImageData) {
-      const newPost: Post = {
-        title: data.title as string,
-        description: data.description as string,
-        filename: newImageData.path,
-        user_id: searchParams.user_id
-      }
-      const post = await addPost(newPost);
-      if (post) {
-        console.log("Successfully posted article!");
-        router.push('/news');
+      const newFile = new File([blob], newFileName, { type: image.type });
+
+      const newImageData = await AddImage(newFile, 'post');
+      if (newImageData) {
+        const newPost: Post = {
+          title: data.title as string,
+          description: data.description as string,
+          filename: newImageData.path,
+          user_id: searchParams.user_id
+        }
+        const post = await addPost(newPost);
+        if (post) {
+          router.push('/news');
+        }
       }
     }
   }
@@ -94,6 +100,11 @@ export default function CreatePostPage({
             name="description"
             className="resize-none h-[284px] rounded-xl bg-lightGreen p-2 text-black placeholder-inputs w-full"
           />
+          {showError &&
+            <div className=" bg-lightGreen text-center rounded-xl p-3">
+              Please, fill all the fields before submiting
+            </div>
+          }
           <SubmitButton pendingText="posting...">
             Submit article
           </SubmitButton>
