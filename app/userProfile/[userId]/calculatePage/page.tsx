@@ -2,19 +2,22 @@
 import React, { useState } from "react";
 import BackArrow from "@/components/backArrow";
 import YellowButton from "@/components/YellowButton";
-import { SubmitButton } from "../login/submit-button";
+import { SubmitButton } from "../../../login/submit-button";
 import { Poppins } from "next/font/google";
+import { updatePercentage } from "@/services/users.service";
+import { type UUID, createHash } from "crypto";
 
 
-const CalculatePage = () => {
+const CalculatePage = ({ params }: { params: { userId: UUID } }) => {
 
     const [percentage, setPercentage] = useState<number | null>(null);
     const [totalEnergy, setTotalEnergy] = useState<number | undefined>();
     const [renewableEnergy, setRenewableEnergy] = useState<number | undefined>();
 
-    const calculatePercentage = () => {
+    const calculatePercentage = async () => {
         if (totalEnergy && renewableEnergy && totalEnergy !== 0) {
             const finalEnergy = (renewableEnergy / totalEnergy) * 100;
+            const percentageNumber = await updatePercentage(params.userId,Number(finalEnergy.toFixed(2)))
             setPercentage(finalEnergy);
         }
     };
