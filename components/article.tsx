@@ -15,7 +15,7 @@ type ArticleProps = {
 const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id }) => {
   return (
     <Link
-      className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-darkGreen aspect-articleCard w-full rounded-md gap-5 px-5 py-4 article-container`}
+      className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-notWhite border-2 border-darkGreen aspect-articleCard w-full rounded-md gap-5 px-5 py-4 article-container`}
       href={`/selectedNews/${post_id}`}
     >
       <div className='w-[30%] aspect-square'>

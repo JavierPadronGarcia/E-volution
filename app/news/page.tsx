@@ -10,7 +10,7 @@ export default async function NewsPage() {
   return (
     <div className="flex flex-col gap-10 relative w-full">
       <h1 className="text-center mt-10 font-bold text-xl">News/Articles</h1>
-      <div className="flex flex-col gap-7 items-center w-full pb-5">
+      <div className="flex flex-col gap-7 items-center w-full pb-5 pl-5 pr-5">
         {allPosts.map((post: Post, index) => (
           <Article
             image={!post.filename || post.filename === 'No file' ? null : post.filename}
