@@ -8,7 +8,7 @@ import { addPost } from "@/services/posts.service";
 import { FormEvent, useRef, useState } from "react";
 import { FaImage } from "react-icons/fa";
 import { Post } from "@/app/types/types";
-import { type UUID } from "crypto";
+import { type UUID, createHash } from "crypto";
 import { useRouter } from "next/navigation";
 
 export const revalidate = 0;
@@ -26,12 +26,20 @@ export default function CreatePostPage({
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const data: { [key: string]: FormDataEntryValue } = Object.fromEntries(formData.entries());
+    const image = data.image as File;
 
-    const newImageData = await AddImage(data.image as File, 'post');
+    const uuid = createHash('sha1').update(Date.now().toString()).digest('hex');
+    const fileExtension = getFileExtension(image.name);
+    const newFileName = `${uuid}.${fileExtension}`;
+    var blob = image.slice(0, image.size, image.type);
+
+    const newFile = new File([blob], newFileName, { type: image.type });
+
+    const newImageData = await AddImage(newFile, 'post');
     if (newImageData) {
       const newPost: Post = {
         title: data.title as string,
-        description: data.desciption as string,
+        description: data.description as string,
         filename: newImageData.path,
         user_id: searchParams.user_id
       }
@@ -93,4 +101,8 @@ export default function CreatePostPage({
       </div>
     </div>
   )
+}
+
+function getFileExtension(filename: string) {
+  return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
 }
