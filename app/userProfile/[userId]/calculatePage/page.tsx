@@ -17,7 +17,7 @@ const CalculatePage = ({ params }: { params: { userId: UUID } }) => {
     const calculatePercentage = async () => {
         if (totalEnergy && renewableEnergy && totalEnergy !== 0) {
             const finalEnergy = (renewableEnergy / totalEnergy) * 100;
-            const percentageNumber = await updatePercentage(params.userId,finalEnergy)
+            const percentageNumber = await updatePercentage(params.userId,Number(finalEnergy.toFixed(2)))
             setPercentage(finalEnergy);
         }
     };
