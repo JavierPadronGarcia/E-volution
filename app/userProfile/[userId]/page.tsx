@@ -6,6 +6,7 @@ import News from "@/components/News";
 import { getLoggedInUser, getUser } from '@/services/users.service';
 import { type UUID } from 'crypto';
 import Link from 'next/link';
+import { ImageBucketURL } from '@/app/constants/supabaseConstants';
 
 export const revalidate = 0;
 
@@ -24,7 +25,10 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
       <h1 className='mt-16 mb-5 text-center'>{user.name}</h1>
       <div className='justify-center flex text-center gap-8'>
         <div className='w-[148px] h-[148px] bg-notWhite rounded-md border-2 border-darkGreen  justify-center flex items-center'>
-          <FiUser className='w-[95px] h-[105px]' />
+          {user.filename
+            ? <img src={`${ImageBucketURL}/${user.filename}`} className='size-full rounded-md' alt="profile picture" />
+            : <FiUser className='w-[95px] h-[105px]' />
+          }
         </div>
         {isPersonalAccount
           ? (
