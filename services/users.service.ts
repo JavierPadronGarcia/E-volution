@@ -41,3 +41,18 @@ export const addUser = async (userId: UUID, user_name: string) => {
     throw err
   }
 }
+
+export async function updateUser(id: number, updatedUser: User) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase.from('users').update(updatedUser).eq('id', id);
+    if (error) {
+      throw error;
+    }
+    console.log("User updated successfully:", data);
+    return data;
+  } catch (error: any) {
+    console.error('Error updating user:', error.message);
+    throw error;
+  }
+}
