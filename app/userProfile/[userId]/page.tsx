@@ -54,13 +54,6 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
         </div>
       </div>
       <News />
-        <div className='absolute'>
-          <Article
-          image='/breakingNews.png'
-          title='Gran Canaria'
-          content='Gran Canaria is becoming to hot for the danish students. They have now melted'
-          />
-        </div>
     </div>
   );
 };
