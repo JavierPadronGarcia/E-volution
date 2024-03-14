@@ -7,14 +7,17 @@ import { getUser } from '@/services/users.service';
 import { getLoggedInUser } from '@/services/auth.service';
 import { type UUID } from 'crypto';
 import Link from 'next/link';
-import Article from '@/components/article';
 import { ImageBucketURL } from '@/app/constants/supabaseConstants';
+import { getAllLikesOfTheUser } from '@/services/likes.service';
+import { getAllPostsOfTheUser } from '@/services/posts.service';
 
 export const revalidate = 0;
 
 const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
   const user = await getUser(params.userId);
   const loggedInUser = await getLoggedInUser();
+  const likedPosts = await getAllLikesOfTheUser(params.userId);
+  const postedPosts = await getAllPostsOfTheUser(params.userId);
 
   let isPersonalAccount = false;
 
@@ -53,7 +56,7 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
           {user.description ?? 'No description'}
         </div>
       </div>
-      <News />
+      <News likedNews={likedPosts} postedNews={postedPosts} />
     </div>
   );
 };

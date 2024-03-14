@@ -25,6 +25,9 @@ module.exports = {
         poppins: ["var(--font-poppins)"],
         poly: ["var(--font-poly)"],
       },
+      aspectRatio: {
+        'articleCard': '46/15'
+      }
     },
   },
   plugins: [],
