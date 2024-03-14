@@ -35,7 +35,7 @@ const UserProfile = async ({ params }: { params: { userId: UUID } }) => {
         {isPersonalAccount
           ? (
             <Link
-              href='/calculatePage'
+              href={`/userProfile/${params.userId}/calculatePage`}
               className='w-[148px] h-[148px] text-xs pt-5 bg-notWhite rounded-md border-2 border-darkGreen flex flex-col relative select-none'
             >
               <div>Renewable energies</div>
