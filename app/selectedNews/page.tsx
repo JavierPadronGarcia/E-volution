@@ -6,10 +6,19 @@ import Author from "@/components/author";
 import AuthButton from "@/components/AuthButton";
 import LikeButton from "@/components/likeButton";
 import ProfileButton from "@/components/profileButton";
+import { UUID } from "crypto";
+import { getUser } from "@/services/users.service";
+import { userInfo } from "os";
+import { User } from "../types/types";
 
 const SelectedNews = async () => {
     const user=await getLoggedInUser()
-
+    let userInfo: User | null = null;
+    if (user) {
+        userInfo=await getUser(user.id as UUID );
+        console.log(userInfo)
+    }
+    
     return (
         <>
         { user && <StarButton className="w-[49px] absolute top-8 right-8" 
@@ -36,7 +45,10 @@ const SelectedNews = async () => {
             <Link href='/register' className="underline justify-center flex">Register</Link>
           </div>:
            <> <div className="w-full ml-7"> Made by
-            <Author/>
+            <Author
+            userId={user.id as UUID}
+            username={userInfo?.name || ''}
+            />
             </div>
     <ProfileButton/></>}
         </>
