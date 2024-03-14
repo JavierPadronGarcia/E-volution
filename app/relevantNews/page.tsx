@@ -14,6 +14,7 @@ const MyPage: React.FC = () => {
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='left'
           />
         </div>
 
@@ -22,6 +23,7 @@ const MyPage: React.FC = () => {
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='right'
           />
         </div>
 
@@ -30,6 +32,7 @@ const MyPage: React.FC = () => {
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='left'
           />
         </div>
 
