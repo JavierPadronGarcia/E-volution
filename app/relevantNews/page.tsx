@@ -7,13 +7,14 @@ import Author from '@/components/author';
 const MyPage: React.FC = () => {
   return (
     <>
-      <div className='grid gap-8 grid-cols-1'>
+      <div className='grid gap-8 grid-cols-1 w-full pb-5 pl-5 pr-5'>
 
         <div className='relative'>
           <Article
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='left'
           />
         </div>
 
@@ -22,6 +23,7 @@ const MyPage: React.FC = () => {
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='right'
           />
         </div>
 
@@ -30,6 +32,7 @@ const MyPage: React.FC = () => {
             image='/breakingNews.png'
             title="Put title here"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            side='left'
           />
         </div>
 

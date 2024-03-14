@@ -2,6 +2,7 @@ import Article from "@/components/article";
 import { getAllPosts } from "@/services/posts.service";
 import { Post } from "../types/types";
 import AddPostNavigationButton from "@/components/AddPostNavigationButton";
+import ProfileButton from "@/components/profileButton";
 
 export default async function NewsPage() {
 
@@ -21,7 +22,10 @@ export default async function NewsPage() {
           />
         ))}
       </div>
-      <AddPostNavigationButton styles="size-[51px] fixed bottom-3 left-3" />
+      <div className="flex">
+        <AddPostNavigationButton styles="size-[51px] bottom-3 absolute bottom-6 left-5" />
+      <ProfileButton/>
+      </div>
     </div>
   )
 }

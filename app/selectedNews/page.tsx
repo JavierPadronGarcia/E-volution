@@ -2,6 +2,10 @@ import BackArrow from "@/components/backArrow";
 import Link from "next/link";
 import StarButton from "@/components/starButton/starButton";
 import { getLoggedInUser } from "@/services/auth.service";
+import Author from "@/components/author";
+import AuthButton from "@/components/AuthButton";
+import LikeButton from "@/components/likeButton";
+import ProfileButton from "@/components/profileButton";
 
 const SelectedNews = async () => {
     const user=await getLoggedInUser()
@@ -27,10 +31,14 @@ const SelectedNews = async () => {
             Renewable energycomes from unlimited, naturally replenished resources, such as the sun, tides, and wind. Renewable energy can be used for electricity generation, space and water heating and cooling, and transportation. Non-renewable energy, in contrast, comes from finite sources, such as coal, natural gas, and oil.
          </p>
         </div>
-        { !user && <div className="flex gap-7 justify-center w-full m-5">
+        { !user ? <div className="flex gap-7 justify-center w-full m-5">
             <Link href='/login' className="underline justify-center flex">Login</Link>
             <Link href='/register' className="underline justify-center flex">Register</Link>
-          </div>}
+          </div>:
+           <> <div className="w-full ml-7"> Made by
+            <Author/>
+            </div>
+    <ProfileButton/></>}
         </>
 
     )
