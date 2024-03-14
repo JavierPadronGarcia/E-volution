@@ -68,7 +68,7 @@ export default function CreatePostPage({
   return (
     <div className="w-full h-[100vh] flex flex-col items-center">
       <h1 className="mt-[93px]">Post an article</h1>
-      <Hamburgermenu />
+      <Hamburgermenu userId={searchParams.user_id} />
       <BackArrow />
       <div className="size-full  flex items-center justify-center">
         <form onSubmit={(e) => postArticle(e)} className="flex flex-col gap-5 justify-center items-center w-[280px]">
