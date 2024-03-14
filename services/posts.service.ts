@@ -19,7 +19,7 @@ export async function getAllPosts() {
   }
 }
 
-export async function getPostById(id: number) {
+export async function getPostById(id: UUID) {
   try {
     const supabase = createClient();
     const { data, error } = await supabase.from('posts').select('*').eq('id', id).single();

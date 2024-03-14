@@ -54,7 +54,7 @@ export async function updateUser(id: UUID, updatedUser: User) {
 
 export async function updatePercentage(id: UUID, percentage: number) {
   try {
-    const supabase = createClient();
+    const supabase = clientCreateClient();
     const { data, error } = await supabase.from('users').update({ e_percentage: percentage }).eq('id', id);
     if (error){
       throw error;
