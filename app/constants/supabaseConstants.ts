@@ -1,0 +1,1 @@
+export const ImageBucketURL = 'https://zbajkxsdlnrqadxtramn.supabase.co/storage/v1/object/public/ImageBucket';

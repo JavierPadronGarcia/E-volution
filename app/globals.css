@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
     --background: 200 20% 98%;
@@ -24,19 +25,18 @@
   * {
     @apply border-foreground/20;
   }
-}
 
-.animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
-}
-
-@keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  .placeholder-inputs::placeholder {
+    color: #58585A;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .article-container:hover .article-image {
+    transform: scale(1.06);
+    transition: transform ease-in-out .1s;
+  }
+
+  .article-container:hover .article-arrow {
+    color: #22c55e;
+    transition: color ease-in-out .1s;
   }
 }
