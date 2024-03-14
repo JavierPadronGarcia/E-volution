@@ -55,3 +55,17 @@ export const unLikePost = async (user_id: UUID, post_id: UUID): Promise<boolean>
     throw err;
   }
 }
+
+export const getAllLikes = async () => {
+  try {
+    const supabase = createClient();
+
+    const {data, error} = await  supabase.rpc('get_top_posts');
+    if(error){
+      throw error
+    }
+    return data as Like[];
+  } catch (error) {
+    throw error
+  }
+}
