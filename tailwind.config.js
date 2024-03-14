@@ -10,6 +10,7 @@ module.exports = {
         darkGreen: '#4D917A',
         yellowButton: '#F0F1A1',
         lightGreen: '#94BDAF',
+        hoveredGreen: '#22c55e',
         notWhite: '#CADED7',
         lightWhite: '#fafafa',
         darkGray: '#58585A',
