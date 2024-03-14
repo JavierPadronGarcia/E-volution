@@ -28,6 +28,8 @@ const SelectedNews = async ({ params }: { params: { postId: UUID } }) => {
     <>
       {user && <StarButton className="w-[49px] absolute top-8 right-8"
         initialState={false}
+        user_id={user.id as UUID}
+        post_id={post.id}
       ></StarButton>}
       <div>
         <BackArrow />

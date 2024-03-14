@@ -24,7 +24,7 @@ export default async function NewsPage() {
       </div>
       <div className="flex">
         <AddPostNavigationButton styles="size-[51px] bottom-3 absolute bottom-6 left-5" />
-      <ProfileButton/>
+        <ProfileButton />
       </div>
     </div>
   )
