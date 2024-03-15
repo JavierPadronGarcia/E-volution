@@ -15,7 +15,7 @@ const News = ({ likedNews, postedNews }: { likedNews?: Like[], postedNews?: Post
           <LikeButton handleClick={() => setLikeIsActive(false)} title="Posted News" isActive={!likeIsActive} />
         </div>
 
-        <div className="flex flex-col items-start gap-2 p-3 lg:p-2 overflow-y-auto max-h-[85%]">
+        <div className="flex flex-col items-start gap-2 p-3 lg:p-2 overflow-y-auto max-h-[85%] lg:max-h-[100%]">
           {likeIsActive
             ? <>
               {likedNews?.map((article, index) => (
@@ -26,7 +26,8 @@ const News = ({ likedNews, postedNews }: { likedNews?: Like[], postedNews?: Post
                     image={!article.filename || article.filename === 'No file' ? null : article.filename}
                     post_id={article.post_id}
                     side={index % 2 === 0 ? 'left' : 'right'}
-                    customLineClamp="line-clamp-2"
+                    customLineClamp="line-clamp-1"
+                    defaultLineClamp={true}
                   />
                 </div>
               ))}
@@ -40,7 +41,8 @@ const News = ({ likedNews, postedNews }: { likedNews?: Like[], postedNews?: Post
                     image={!article.filename || article.filename === 'No file' ? null : article.filename}
                     post_id={article.id}
                     side={index % 2 === 0 ? 'left' : 'right'}
-                    customLineClamp="line-clamp-2"
+                    customLineClamp="line-clamp-1"
+                    defaultLineClamp={true}
                   />
                 </div>
               ))}
