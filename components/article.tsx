@@ -10,9 +10,11 @@ type ArticleProps = {
   content: string;
   post_id?: UUID;
   side: string;
+  customLineClamp?: string;
+  defaultLineClamp?: boolean | undefined;
 }
 
-const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id }) => {
+const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id, customLineClamp, defaultLineClamp }) => {
   return (
     <Link
       className={`relative flex ${side === 'left' ? 'flex-row' : 'flex-row-reverse'} items-center bg-notWhite border-2 border-darkGreen aspect-articleCard w-full rounded-md gap-5 px-5 py-4 article-container`}
@@ -26,7 +28,7 @@ const Article: React.FC<ArticleProps> = ({ title, image, content, side, post_id 
       </div>
       <div className='w-[70%] flex flex-col h-full p-1'>
         <p className='text-xl text-start font-bold line-clamp-1'>{title}</p>
-        <p className='text-xs text-left text-ellipsis line-clamp-3'>{content}</p>
+        <p className={`text-xs text-left text-ellipsis ${!defaultLineClamp && 'line-clamp-3'} ${customLineClamp}`}>{content}</p>
       </div>
       <div className={`absolute w-[22px] h-[22px] article-arrow cursor-pointer bottom-0
         ${side === 'left'
