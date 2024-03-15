@@ -44,8 +44,10 @@ export default function Register({
   };
 
   return (
-    <div className="w-5/6 flex justify-center">
-      <BackArrow />
+    <div className="w-5/6 flex flex-col items-center">
+      <div className="w-full sm:relative md:w-[640px]">
+        <BackArrow />
+      </div>
       <div className="flex flex-col w-full sm:max-w-md gap-2">
         <h1 className="text-center flex justify-center items-center mt-12 mb-8 select-none">
           <span className="font-poly italic text-6xl"> E </span>

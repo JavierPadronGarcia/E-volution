@@ -29,9 +29,11 @@ export default function Login({
   };
 
   return (
-
-    <div className="ml-0 px-0 w-5/6"> <BackArrow></BackArrow>
-      <div className="flex flex-col w-full sm:max-w-md gap-2">
+    <div className="ml-0 px-0 w-5/6 flex flex-col items-center">
+      <div className="w-full sm:relative md:w-[640px]">
+        <BackArrow />
+      </div>
+      <div className="flex flex-col w-full sm:max-w-md sm:items-center gap-2">
         <h1 className="text-center flex justify-center items-center mt-12 mb-20 select-none">
 
           <span className="font-poly italic text-6xl"> E </span>

@@ -73,7 +73,7 @@ export default function UpdateUser({ params }: { params: { userId: UUID } }) {
 
   return (
     <div className="w-full h-[100vh] flex flex-col items-center">
-      <h1 className="mt-[93px]">Edit user profile</h1>
+      <h1 className="mt-[93px]">Editing your profile</h1>
       <Hamburgermenu userId={params.userId} />
       <BackArrow />
       <div className="size-full  flex items-center justify-center">
